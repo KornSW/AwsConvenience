@@ -1,0 +1,162 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4130D21C-FE8F-4925-93E7-217B4AF1B7D9}"
+	ProjectSection(SolutionItems) = preProject
+		KornSW.AwsConvenience.Core.nuspec = KornSW.AwsConvenience.Core.nuspec
+		KornSW.AwsConvenience.GraphQL.nuspec = KornSW.AwsConvenience.GraphQL.nuspec
+		KornSW.AwsConvenience.S3.nuspec = KornSW.AwsConvenience.S3.nuspec
+		KornSW.AwsConvenience.SNS.AspNetMvcEndpoint.nuspec = KornSW.AwsConvenience.SNS.AspNetMvcEndpoint.nuspec
+		KornSW.AwsConvenience.SNS.nuspec = KornSW.AwsConvenience.SNS.nuspec
+	EndProjectSection
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Tests.code", "Tests.code\Tests.code.shproj", "{5E17C8E8-0BC8-4F7C-A022-C8104A415628}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AwsConvenience.Tests_net461", "Tests.net461\AwsConvenience.Tests_net461.csproj", "{D0B8734C-340F-4B2A-80EE-C00AFDD59E13}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AwsConvenience.Tests_net5.0", "Tests.net5.0\AwsConvenience.Tests_net5.0.csproj", "{FBB1DA4C-6A98-4824-8BB7-C5F45AE34019}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E752DB06-00A0-4788-99F1-260E31FD33FC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sources", "Sources", "{EFB5135D-039A-4D92-8FDD-9EA5D070F991}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Targets", "Targets", "{24674244-E4CB-4D13-A513-2F24C3FB13AD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Targets", "Targets", "{2D08700D-C147-49AB-9C08-8E2AC79A3065}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Lib.SNS.code", "Lib.SNS.code\Lib.SNS.code.shproj", "{8339B9CC-63B4-440C-9FEF-7E7013018D40}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Lib.SNS.AspNetMvcEndpoint.code", "Lib.SNS.AspNetMvcEndpoint.code\Lib.SNS.AspNetMvcEndpoint.code.shproj", "{32FFA7C3-0F72-4769-B8F7-92F6B1842601}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Lib.S3.code", "Lib.S3.code\Lib.S3.code.shproj", "{30E68995-F1A1-4327-B9C3-FF3DFA3EAFFA}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Lib.Core.code", "Lib.Core.code\Lib.Core.code.shproj", "{789CE70F-1756-4834-8D0C-9EB81C424772}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Lib.GraphQL.code", "Lib.GraphQL.code\Lib.GraphQL.code.shproj", "{AF2D9CD3-B914-4495-BE16-C19A9631EE65}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AwsConvenience.Core_net5.0", "Lib.Core.net5.0\AwsConvenience.Core_net5.0.csproj", "{BAEF2279-9488-4643-8C15-A29F522307E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AwsConvenience.Core_net461", "Lib.Core.net461\AwsConvenience.Core_net461.csproj", "{1FC35090-CC59-48A0-9D34-81F3A4AD4A4F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AwsConvenience.GraphQL_net5.0", "Lib.GraphQL.net5.0\AwsConvenience.GraphQL_net5.0.csproj", "{044E54E5-C8D1-4BEE-9299-37C057A01B18}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AwsConvenience.GraphQL_net461", "Lib.GraphQL.net461\AwsConvenience.GraphQL_net461.csproj", "{7A157F68-B10B-4F5D-BCB9-9C7402F5B5EB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AwsConvenience.S3_net5.0", "Lib.S3.net5.0\AwsConvenience.S3_net5.0.csproj", "{102DCC85-D237-440C-B897-95D3B272D8DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AwsConvenience.S3_net461", "Lib.S3.net461\AwsConvenience.S3_net461.csproj", "{40195A19-7184-4CB2-9ECE-D3DB1C4BA89D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AwsConvenience.SNS.AspNetMvcEndpoint_net5.0", "Lib.SNS.AspNetMvcEndpoint.net5.0\AwsConvenience.SNS.AspNetMvcEndpoint_net5.0.csproj", "{B6766F12-D57C-476F-B3B4-6F8241E18818}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AwsConvenience.SNS.AspNetMvcEndpoint_net461", "Lib.SNS.AspNetMvcEndpoint.net461\AwsConvenience.SNS.AspNetMvcEndpoint_net461.csproj", "{F51ACBF3-5CE6-4F3B-801E-00653A415262}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AwsConvenience.SNS_net5.0", "Lib.SNS.net5.0\AwsConvenience.SNS_net5.0.csproj", "{797C3DAB-ACC7-400E-9600-3C7AD55EC976}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AwsConvenience.SNS_net461", "Lib.SNS.net461\AwsConvenience.SNS_net461.csproj", "{43014E27-4EB2-4DC9-B96B-D8167E05EE30}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Lib.GraphQL.code\Lib.GraphQL.code.projitems*{044e54e5-c8d1-4bee-9299-37c057a01b18}*SharedItemsImports = 5
+		Lib.S3.code\Lib.S3.code.projitems*{102dcc85-d237-440c-b897-95d3b272d8db}*SharedItemsImports = 5
+		Lib.Core.code\Lib.Core.code.projitems*{1fc35090-cc59-48a0-9d34-81f3a4ad4a4f}*SharedItemsImports = 4
+		Lib.S3.code\Lib.S3.code.projitems*{30e68995-f1a1-4327-b9c3-ff3dfa3eaffa}*SharedItemsImports = 13
+		Lib.SNS.AspNetMvcEndpoint.code\Lib.SNS.AspNetMvcEndpoint.code.projitems*{32ffa7c3-0f72-4769-b8f7-92f6b1842601}*SharedItemsImports = 13
+		Lib.S3.code\Lib.S3.code.projitems*{40195a19-7184-4cb2-9ece-d3db1c4ba89d}*SharedItemsImports = 4
+		Lib.SNS.code\Lib.SNS.code.projitems*{43014e27-4eb2-4dc9-b96b-d8167e05ee30}*SharedItemsImports = 4
+		Tests.code\Tests.code.projitems*{5e17c8e8-0bc8-4f7c-a022-c8104a415628}*SharedItemsImports = 13
+		Lib.Core.code\Lib.Core.code.projitems*{789ce70f-1756-4834-8d0c-9eb81c424772}*SharedItemsImports = 13
+		Lib.SNS.code\Lib.SNS.code.projitems*{797c3dab-acc7-400e-9600-3c7ad55ec976}*SharedItemsImports = 5
+		Lib.GraphQL.code\Lib.GraphQL.code.projitems*{7a157f68-b10b-4f5d-bcb9-9c7402f5b5eb}*SharedItemsImports = 4
+		Lib.SNS.code\Lib.SNS.code.projitems*{8339b9cc-63b4-440c-9fef-7e7013018d40}*SharedItemsImports = 13
+		Lib.GraphQL.code\Lib.GraphQL.code.projitems*{af2d9cd3-b914-4495-be16-c19a9631ee65}*SharedItemsImports = 13
+		Lib.SNS.AspNetMvcEndpoint.code\Lib.SNS.AspNetMvcEndpoint.code.projitems*{b6766f12-d57c-476f-b3b4-6f8241e18818}*SharedItemsImports = 5
+		Lib.Core.code\Lib.Core.code.projitems*{baef2279-9488-4643-8c15-a29f522307e2}*SharedItemsImports = 5
+		Tests.code\Tests.code.projitems*{d0b8734c-340f-4b2a-80ee-c00afdd59e13}*SharedItemsImports = 4
+		Lib.SNS.AspNetMvcEndpoint.code\Lib.SNS.AspNetMvcEndpoint.code.projitems*{f51acbf3-5ce6-4f3b-801e-00653a415262}*SharedItemsImports = 4
+		Tests.code\Tests.code.projitems*{fbb1da4c-6a98-4824-8bb7-c5f45ae34019}*SharedItemsImports = 5
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D0B8734C-340F-4B2A-80EE-C00AFDD59E13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0B8734C-340F-4B2A-80EE-C00AFDD59E13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0B8734C-340F-4B2A-80EE-C00AFDD59E13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0B8734C-340F-4B2A-80EE-C00AFDD59E13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBB1DA4C-6A98-4824-8BB7-C5F45AE34019}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBB1DA4C-6A98-4824-8BB7-C5F45AE34019}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBB1DA4C-6A98-4824-8BB7-C5F45AE34019}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBB1DA4C-6A98-4824-8BB7-C5F45AE34019}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAEF2279-9488-4643-8C15-A29F522307E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAEF2279-9488-4643-8C15-A29F522307E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAEF2279-9488-4643-8C15-A29F522307E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAEF2279-9488-4643-8C15-A29F522307E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FC35090-CC59-48A0-9D34-81F3A4AD4A4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FC35090-CC59-48A0-9D34-81F3A4AD4A4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FC35090-CC59-48A0-9D34-81F3A4AD4A4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FC35090-CC59-48A0-9D34-81F3A4AD4A4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{044E54E5-C8D1-4BEE-9299-37C057A01B18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{044E54E5-C8D1-4BEE-9299-37C057A01B18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{044E54E5-C8D1-4BEE-9299-37C057A01B18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{044E54E5-C8D1-4BEE-9299-37C057A01B18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A157F68-B10B-4F5D-BCB9-9C7402F5B5EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A157F68-B10B-4F5D-BCB9-9C7402F5B5EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A157F68-B10B-4F5D-BCB9-9C7402F5B5EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A157F68-B10B-4F5D-BCB9-9C7402F5B5EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{102DCC85-D237-440C-B897-95D3B272D8DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{102DCC85-D237-440C-B897-95D3B272D8DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{102DCC85-D237-440C-B897-95D3B272D8DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{102DCC85-D237-440C-B897-95D3B272D8DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40195A19-7184-4CB2-9ECE-D3DB1C4BA89D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40195A19-7184-4CB2-9ECE-D3DB1C4BA89D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40195A19-7184-4CB2-9ECE-D3DB1C4BA89D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40195A19-7184-4CB2-9ECE-D3DB1C4BA89D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6766F12-D57C-476F-B3B4-6F8241E18818}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6766F12-D57C-476F-B3B4-6F8241E18818}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6766F12-D57C-476F-B3B4-6F8241E18818}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6766F12-D57C-476F-B3B4-6F8241E18818}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F51ACBF3-5CE6-4F3B-801E-00653A415262}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F51ACBF3-5CE6-4F3B-801E-00653A415262}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F51ACBF3-5CE6-4F3B-801E-00653A415262}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F51ACBF3-5CE6-4F3B-801E-00653A415262}.Release|Any CPU.Build.0 = Release|Any CPU
+		{797C3DAB-ACC7-400E-9600-3C7AD55EC976}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{797C3DAB-ACC7-400E-9600-3C7AD55EC976}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{797C3DAB-ACC7-400E-9600-3C7AD55EC976}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{797C3DAB-ACC7-400E-9600-3C7AD55EC976}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43014E27-4EB2-4DC9-B96B-D8167E05EE30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43014E27-4EB2-4DC9-B96B-D8167E05EE30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43014E27-4EB2-4DC9-B96B-D8167E05EE30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43014E27-4EB2-4DC9-B96B-D8167E05EE30}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5E17C8E8-0BC8-4F7C-A022-C8104A415628} = {E752DB06-00A0-4788-99F1-260E31FD33FC}
+		{D0B8734C-340F-4B2A-80EE-C00AFDD59E13} = {2D08700D-C147-49AB-9C08-8E2AC79A3065}
+		{FBB1DA4C-6A98-4824-8BB7-C5F45AE34019} = {2D08700D-C147-49AB-9C08-8E2AC79A3065}
+		{24674244-E4CB-4D13-A513-2F24C3FB13AD} = {EFB5135D-039A-4D92-8FDD-9EA5D070F991}
+		{2D08700D-C147-49AB-9C08-8E2AC79A3065} = {E752DB06-00A0-4788-99F1-260E31FD33FC}
+		{8339B9CC-63B4-440C-9FEF-7E7013018D40} = {EFB5135D-039A-4D92-8FDD-9EA5D070F991}
+		{32FFA7C3-0F72-4769-B8F7-92F6B1842601} = {EFB5135D-039A-4D92-8FDD-9EA5D070F991}
+		{30E68995-F1A1-4327-B9C3-FF3DFA3EAFFA} = {EFB5135D-039A-4D92-8FDD-9EA5D070F991}
+		{789CE70F-1756-4834-8D0C-9EB81C424772} = {EFB5135D-039A-4D92-8FDD-9EA5D070F991}
+		{AF2D9CD3-B914-4495-BE16-C19A9631EE65} = {EFB5135D-039A-4D92-8FDD-9EA5D070F991}
+		{BAEF2279-9488-4643-8C15-A29F522307E2} = {24674244-E4CB-4D13-A513-2F24C3FB13AD}
+		{1FC35090-CC59-48A0-9D34-81F3A4AD4A4F} = {24674244-E4CB-4D13-A513-2F24C3FB13AD}
+		{044E54E5-C8D1-4BEE-9299-37C057A01B18} = {24674244-E4CB-4D13-A513-2F24C3FB13AD}
+		{7A157F68-B10B-4F5D-BCB9-9C7402F5B5EB} = {24674244-E4CB-4D13-A513-2F24C3FB13AD}
+		{102DCC85-D237-440C-B897-95D3B272D8DB} = {24674244-E4CB-4D13-A513-2F24C3FB13AD}
+		{40195A19-7184-4CB2-9ECE-D3DB1C4BA89D} = {24674244-E4CB-4D13-A513-2F24C3FB13AD}
+		{B6766F12-D57C-476F-B3B4-6F8241E18818} = {24674244-E4CB-4D13-A513-2F24C3FB13AD}
+		{F51ACBF3-5CE6-4F3B-801E-00653A415262} = {24674244-E4CB-4D13-A513-2F24C3FB13AD}
+		{797C3DAB-ACC7-400E-9600-3C7AD55EC976} = {24674244-E4CB-4D13-A513-2F24C3FB13AD}
+		{43014E27-4EB2-4DC9-B96B-D8167E05EE30} = {24674244-E4CB-4D13-A513-2F24C3FB13AD}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D2F37C1D-32F0-4BF2-AAEB-46B9D8C07D23}
+	EndGlobalSection
+EndGlobal

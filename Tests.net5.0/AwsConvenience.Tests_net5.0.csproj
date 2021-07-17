@@ -1,0 +1,59 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>EntityAnnotations</RootNamespace>
+
+    <IsPackable>false</IsPackable>
+
+    <AssemblyVersion>0.0.0.0</AssemblyVersion>
+
+    <Version>0.0.0</Version>
+
+    <AssemblyName>KornSW.AwsConvenience.Tests</AssemblyName>
+
+    <PackageId>Tests</PackageId>
+
+    <Product>Tests</Product>
+
+    <Company />
+
+    <Authors>Tests</Authors>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <NoWarn>1701;1702;1591</NoWarn>
+    <DefineConstants>DEBUG;TRACE;NET5</DefineConstants>
+    <OutputPath>..\(Stage)\Bin\net5.0\</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <NoWarn>1701;1702;1591</NoWarn>
+    <DefineConstants>TRACE;NET5</DefineConstants>
+    <OutputPath>..\(Stage)\Bin\net5.0\</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.10.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="2.2.4" />
+    <PackageReference Include="MSTest.TestFramework" Version="2.2.4" />
+    <PackageReference Include="coverlet.collector" Version="3.0.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lib.Core.net5.0\AwsConvenience.Core_net5.0.csproj" />
+    <ProjectReference Include="..\Lib.GraphQL.net5.0\AwsConvenience.GraphQL_net5.0.csproj" />
+    <ProjectReference Include="..\Lib.S3.net5.0\AwsConvenience.S3_net5.0.csproj" />
+    <ProjectReference Include="..\Lib.SNS.AspNetMvcEndpoint.net5.0\AwsConvenience.SNS.AspNetMvcEndpoint_net5.0.csproj" />
+    <ProjectReference Include="..\Lib.SNS.net5.0\AwsConvenience.SNS_net5.0.csproj" />
+  </ItemGroup>
+
+  <Import Project="..\Tests.code\Tests.code.projitems" Label="Shared" />
+
+</Project>

@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <AssemblyName>KornSW.AwsConvenience.Core</AssemblyName>
+    <RootNamespace>Amazon</RootNamespace>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <PackageId>KornSW.AwsConvenience.Core</PackageId>
+    <Description>some convenience for using AWS from .NET (includes an attribute based object-binder for SNS-Events)</Description>
+    <Product>KornSW.AwsConvenience</Product>
+    <Company>KornSW</Company>
+    <Copyright>KornSW</Copyright>
+    <Version>1.0.0</Version>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <Authors>KornSW</Authors>
+    <FileVersion>1.0.0.0</FileVersion>
+    <PackageTags>Amazon Web Services AWS SNS</PackageTags>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>..\(Stage)\Bin\net5.0\KornSW.AwsConvenience.Core.xml</DocumentationFile>
+    <OutputPath>..\(Stage)\Bin\net5.0\</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <NoWarn>1701;1702;1591</NoWarn>
+    <DefineConstants>TRACE;DEBUG;NET5</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\(Stage)\Bin\net5.0\</OutputPath>
+    <DocumentationFile>..\(Stage)\Bin\net5.0\KornSW.AwsConvenience.Core.xml</DocumentationFile>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <NoWarn>1701;1702;1591</NoWarn>
+    <DefineConstants>TRACE;NET5</DefineConstants>
+  </PropertyGroup>
+
+  <Import Project="..\Lib.Core.code\Lib.Core.code.projitems" Label="Shared" />
+
+  <ItemGroup>
+    <PackageReference Include="AWSSDK.Core" Version="3.7.0.31" />
+    <PackageReference Include="AWSSDK.SimpleSystemsManagement" Version="3.7.3.12" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+</Project>
