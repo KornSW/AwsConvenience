@@ -9,7 +9,7 @@
     <Import_RootNamespace>Amazon</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)..\..\..\..\%28git%29\KornSW\%28KornSW%29 AwsConvenience\Lib.Core.code\SimpleSystemsManagement\Attributes\InjectAwsParameterAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SimpleSystemsManagement\Attributes\InjectAwsParameterAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SimpleSystemsManagement\AwsParameterAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
