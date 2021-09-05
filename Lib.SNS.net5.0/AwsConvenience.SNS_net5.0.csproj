@@ -13,10 +13,10 @@
     <Product>KornSW.AwsConvenience</Product>
     <Company>KornSW</Company>
     <Copyright>KornSW</Copyright>
-    <Version>1.0.3</Version>
-    <AssemblyVersion>1.0.3.0</AssemblyVersion>
+    <Version>1.0.4</Version>
+    <AssemblyVersion>1.0.4.0</AssemblyVersion>
     <Authors>KornSW</Authors>
-    <FileVersion>1.0.3.0</FileVersion>
+    <FileVersion>1.0.4.0</FileVersion>
     <PackageTags>Amazon Web Services AWS SNS</PackageTags>
   </PropertyGroup>
   

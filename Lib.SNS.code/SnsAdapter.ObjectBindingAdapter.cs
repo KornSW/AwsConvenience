@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -93,6 +94,10 @@ namespace Amazon.SimpleNotificationService {
         private string _TopicArn;
         private Delegate _Handler;
 
+        private static JsonSerializerSettings _JsonSerializerSettings = new JsonSerializerSettings {
+          ContractResolver = new CamelCasePropertyNamesContractResolver()
+        };
+
         public OutboundPipe(SnsAdapter ep, object obj, EventInfo evt, string topicArn) {
           _Ep = ep;
           _Evt = evt;
@@ -104,7 +109,7 @@ namespace Amazon.SimpleNotificationService {
         }
 
         private void OnOutgoingMessage(TMessage msg) {
-          var rawMessage = JsonConvert.SerializeObject(msg);
+          var rawMessage = JsonConvert.SerializeObject(msg, _JsonSerializerSettings);
           _Ep.PublishRawMessage(_TopicArn, rawMessage);
         }
 
