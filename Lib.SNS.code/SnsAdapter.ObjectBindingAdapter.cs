@@ -18,27 +18,64 @@ namespace Amazon.SimpleNotificationService {
       private List<IDisposable> _OutboundPipes = null;
       private List<IDisposable> _InboundPipes = null;
 
-      public ObjectBindingAdapter(object target, SnsAdapter endpoint) {
+      private List<string> _ArnsToSubscribe = new List<string>();
+
+      public ObjectBindingAdapter(object target, SnsAdapter endpoint, bool doWireUp = true) {
 
         _Target = target;
         _TargetType = target.GetType();
         _Endpoint = endpoint;
 
-        this.Wireup();
+        if (doWireUp) {
+          this.Wireup();
+        }
+
       }
 
-      private void CrawlMembers(Action<EventInfo, string> pubEventVisitor, Action<MethodInfo, string> subMethodVisitor) {
+      private void CrawlMembers(
+        Action<EventInfo, string> pubEventVisitor,
+        Action<MethodInfo, string> subMethodVisitor
+      ) {
+
+        var exceptions = new List<Exception>();
 
         foreach (var e in _TargetType.GetEvents()) {
-          foreach (var a in e.GetCustomAttributes<PublishAwsSnsTopicAttribute>())
-            pubEventVisitor.Invoke(e, _Endpoint.ResolveToValidTopcArn(a.TopicArnOrParamName));
+          foreach (var a in e.GetCustomAttributes<PublishAwsSnsTopicAttribute>()) {
+            string arn = _Endpoint.ResolveToValidTopcArn(a.TopicArnOrParamName);
+            try {
+              pubEventVisitor.Invoke(e, arn);
+            }
+            catch (Exception ex) {
+              exceptions.Add(ex);
+            }
+          }
         }
 
         foreach (var m in _TargetType.GetMethods()) {
-          foreach (var a in m.GetCustomAttributes<SubscribeAwsSnsTopicAttribute>())
-            subMethodVisitor.Invoke(m, _Endpoint.ResolveToValidTopcArn(a.TopicArnOrParamName));
+          foreach (var a in m.GetCustomAttributes<SubscribeAwsSnsTopicAttribute>()) {
+            string arn = _Endpoint.ResolveToValidTopcArn(a.TopicArnOrParamName);
+            try {
+              //this will call GetOrSubscribe
+              subMethodVisitor.Invoke(m, arn);
+            }
+            catch (Exception ex) {
+              exceptions.Add(ex);
+            }
+          }
         }
 
+        if (exceptions.Any()) {
+          throw new AggregateException(exceptions);
+        }
+
+      }
+
+      public string[] ArnsToSubscribe {
+        get {
+          lock (_ArnsToSubscribe) {
+            return _ArnsToSubscribe.ToArray();
+          }
+        }
       }
 
       public void Wireup() {
@@ -49,21 +86,26 @@ namespace Amazon.SimpleNotificationService {
         _OutboundPipes = new List<IDisposable>();
         _InboundPipes = new List<IDisposable>();
 
-        this.CrawlMembers(
-          (pubEvent, topicArn) => {
-            var param = pubEvent.EventHandlerType.GetMethod("Invoke").GetParameters().Single();
-            var genT = typeof(OutboundPipe<>).MakeGenericType(param.ParameterType);
-            var args = new[] { _Endpoint, _Target, pubEvent, topicArn };
-            _OutboundPipes.Add((IDisposable)Activator.CreateInstance(genT, args));
-          },
-          (subMethod, topicArn) => {
-            var param = subMethod.GetParameters().Single();
-            var genT = typeof(InboundPipe<>).MakeGenericType(param.ParameterType);
-            var args = new[] { _Endpoint, _Target, subMethod, topicArn };
-            _InboundPipes.Add((IDisposable)Activator.CreateInstance(genT, args));
-          }
-        );
+        lock (_ArnsToSubscribe) {
+          _ArnsToSubscribe.Clear();
 
+          this.CrawlMembers(
+            (pubEvent, topicArn) => {
+              var param = pubEvent.EventHandlerType.GetMethod("Invoke").GetParameters().Single();
+              var genT = typeof(OutboundPipe<>).MakeGenericType(param.ParameterType);
+              var args = new[] { _Endpoint, _Target, pubEvent, topicArn };
+              _OutboundPipes.Add((IDisposable)Activator.CreateInstance(genT, args));
+            },
+            (subMethod, topicArn) => {
+              _ArnsToSubscribe.Add(topicArn);
+              var param = subMethod.GetParameters().Single();
+              var genT = typeof(InboundPipe<>).MakeGenericType(param.ParameterType);
+              var args = new[] { _Endpoint, _Target, subMethod, topicArn };
+              _InboundPipes.Add((IDisposable)Activator.CreateInstance(genT, args));
+            }
+          );
+
+        }
       }
 
       public bool IsWiredUp {

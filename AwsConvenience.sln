@@ -56,6 +56,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AwsConvenience.SNS_net5.0",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AwsConvenience.SNS_net461", "Lib.SNS.net461\AwsConvenience.SNS_net461.csproj", "{43014E27-4EB2-4DC9-B96B-D8167E05EE30}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Util", "Util\Util\Util.csproj", "{14B92444-3FB4-4E96-8E0E-8C5E3F27CFEC}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Lib.GraphQL.code\Lib.GraphQL.code.projitems*{044e54e5-c8d1-4bee-9299-37c057a01b18}*SharedItemsImports = 5
@@ -130,6 +132,10 @@ Global
 		{43014E27-4EB2-4DC9-B96B-D8167E05EE30}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43014E27-4EB2-4DC9-B96B-D8167E05EE30}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{43014E27-4EB2-4DC9-B96B-D8167E05EE30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14B92444-3FB4-4E96-8E0E-8C5E3F27CFEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14B92444-3FB4-4E96-8E0E-8C5E3F27CFEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14B92444-3FB4-4E96-8E0E-8C5E3F27CFEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14B92444-3FB4-4E96-8E0E-8C5E3F27CFEC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

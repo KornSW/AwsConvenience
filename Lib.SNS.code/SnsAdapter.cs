@@ -15,8 +15,23 @@ namespace Amazon.SimpleNotificationService {
     private const string AwsMagicArnForPendingSubscription = "PendingConfirmation";
 
     private Dictionary<string, string> _ResolveCache = new Dictionary<string, string>();
+    private DateTime _ResolveCacheValidUntil = DateTime.Now.AddMinutes(5);
 
-    public SnsAdapter(string awsAccessKey, string awsSecretKey, string subscriptionCallbackUrl, string awsRegionName = null) {
+    public SnsAdapter(
+      string awsAccessKey,
+      string awsSecretKey,
+      string subscriptionCallbackUrl,
+      string awsRegionName = null,
+      int recheckIntervalMinutes = 5,
+      Action<Exception> exceptionHandler = null
+    ) {
+
+      if(exceptionHandler == null) {
+        _ExceptionHandler = (ex)=> throw ex;
+      }
+      else {
+        _ExceptionHandler = exceptionHandler;
+      }
 
       if (string.IsNullOrWhiteSpace(awsRegionName)) {
         this.AwsRegion = RegionEndpoint.EUCentral1;
@@ -29,11 +44,57 @@ namespace Amazon.SimpleNotificationService {
       this.AwsCredentials = new BasicAWSCredentials(awsAccessKey, awsSecretKey);
       this.SubscriptionCallbackUrl = subscriptionCallbackUrl;
       this.ReloadExistingSubscriptions();
+
+      _RecheckIntervalMinutes = recheckIntervalMinutes;
+      if(_RecheckIntervalMinutes > 0) {
+        _NextRecheck = DateTime.Now.AddMinutes(_RecheckIntervalMinutes);
+        _RecheckTask = Task.Run(this.RecheckWorker);
+      }
+
+    }
+
+    private void RecheckWorker() {
+      while (!_Shutdown) {
+        if (DateTime.Now >= _NextRecheck) {
+
+          try {
+
+            try {
+
+              this.ReloadExistingSubscriptions();
+
+              this.ResubscribeBoundObjects();
+
+            }
+            catch (AggregateException aex) {
+              foreach (var subex in aex.InnerExceptions) {
+                _ExceptionHandler.Invoke(subex);
+              }
+            }
+            catch (Exception ex) {
+              _ExceptionHandler.Invoke(ex);
+            }
+
+          }
+          catch {}
+
+          _NextRecheck = DateTime.Now.AddMinutes(_RecheckIntervalMinutes);
+        }
+
+        System.Threading.Thread.Sleep(5000);
+      }
     }
 
 #if DEBUG
     public static bool SuppressSubscriptionDevmode { get; set; } = false;
 #endif
+
+    private Action<Exception> _ExceptionHandler = null;
+
+    private DateTime _NextRecheck = DateTime.MinValue;
+    private bool _Shutdown = false;
+    private Task _RecheckTask = null;
+    private int _RecheckIntervalMinutes = 5;
 
     private AWSCredentials AwsCredentials { get; set; }
     public RegionEndpoint AwsRegion { get; private set; }
@@ -95,7 +156,7 @@ namespace Amazon.SimpleNotificationService {
 
         lock (_LocalPendingSubscriptions) {
           foreach (var lps in _LocalPendingSubscriptions.ToArray()) {
-            if (subscriptions.Where(s => (s.SubscriptionArn ?? "") == (lps.SubscriptionArn ?? "")).Any()) {
+            if (subscriptions.Where(s => (s.TopicArn ?? "") == (lps.TopicArn ?? "")).Any()) {
               _LocalPendingSubscriptions.Remove(lps);
             }
           }
@@ -116,6 +177,14 @@ namespace Amazon.SimpleNotificationService {
       }
     }
 
+    public SubscriptionInfo[] LocalPendingSubscriptions {
+      get {
+        lock (_LocalPendingSubscriptions) {
+          return _LocalPendingSubscriptions.ToArray();
+        }
+      }
+    }
+
     public SubscriptionInfo GetOrSubscribe(string topicArn) {
       SubscriptionInfo item;
 
@@ -129,6 +198,11 @@ namespace Amazon.SimpleNotificationService {
       lock (_LocalPendingSubscriptions) {
         item = _LocalPendingSubscriptions.Where(s => string.Equals(s.TopicArn, topicArn, StringComparison.InvariantCultureIgnoreCase)).SingleOrDefault();
         if (item is object) {
+          //orphaned - usually is takes only a few seconds until a subscription is confirmed!
+          if (item.Initiated.AddSeconds(30) < DateTime.Now) {
+             //just remoce thie item, becasue a new one will be created below...
+            _LocalPendingSubscriptions.Remove(item);
+          }
           return item;
         }
 
@@ -139,23 +213,46 @@ namespace Amazon.SimpleNotificationService {
           return item;
         }
 #endif
+        try {
 
-        using (var client = new AmazonSimpleNotificationServiceClient(this.AwsCredentials, this.AwsRegion)) {
-          Task<SubscribeResponse> t;
-          if (this.SubscriptionCallbackUrl.StartsWith("https:")) {
-            t = client.SubscribeAsync(topicArn, "https", this.SubscriptionCallbackUrl);
+          using (var client = new AmazonSimpleNotificationServiceClient(this.AwsCredentials, this.AwsRegion)) {
+            Task<SubscribeResponse> t;
+            if (this.SubscriptionCallbackUrl.StartsWith("https:")) {
+              t = client.SubscribeAsync(topicArn, "https", this.SubscriptionCallbackUrl);
+            }
+            else {
+              t = client.SubscribeAsync(topicArn, "http", this.SubscriptionCallbackUrl);
+            }
+
+            t.Wait();
+
+            if (t.IsCompleted && t.Result is object) {
+              item = new SubscriptionInfo(this, topicArn, t.Result.SubscriptionArn, true);
+              _LocalPendingSubscriptions.Add(item);
+            }
+            else {
+              if(t.Exception != null) {
+                throw t.Exception;
+              }
+              else if (t.Result is object) {
+                throw new Exception($"Subscribe-Task failed with Http-Status-Code: {t.Result.HttpStatusCode}!");
+              }
+              else {
+                throw new Exception($"Subscribe-Task failed!");
+              }
+            }
           }
-          else {
-            t = client.SubscribeAsync(topicArn, "http", this.SubscriptionCallbackUrl);
-          }
 
-          t.Wait();
-
-          if (t.IsCompleted && t.Result is object) {
-            item = new SubscriptionInfo(this, topicArn, t.Result.SubscriptionArn, true);
-            _LocalPendingSubscriptions.Add(item);
+        }
+        catch (AggregateException aex) {
+          foreach (var subex in aex.InnerExceptions) {
+          _ExceptionHandler.Invoke(subex);
           }
         }
+        catch (Exception ex) {
+          _ExceptionHandler.Invoke(ex);
+        }
+
       }
 
       return item;
@@ -172,7 +269,9 @@ namespace Amazon.SimpleNotificationService {
             reloadRequired = true;
           }
         }
-
+        lock ( _LocalPendingSubscriptions) {
+          _LocalPendingSubscriptions.Clear();
+        }
         if (reloadRequired) {
           this.ReloadExistingSubscriptions();
         }
@@ -203,10 +302,14 @@ namespace Amazon.SimpleNotificationService {
       }
     }
 
-
     internal string ResolveToValidTopcArn(string topicArnOrParameterKey) {
       if (topicArnOrParameterKey.StartsWith("arn:")) {
         return topicArnOrParameterKey;
+      }
+
+      if(DateTime.Now >= _ResolveCacheValidUntil) {
+        _ResolveCache = new Dictionary<string, string>();
+        _ResolveCacheValidUntil = DateTime.Now.AddMinutes(5);
       }
 
       lock (_ResolveCache) {
@@ -299,7 +402,24 @@ namespace Amazon.SimpleNotificationService {
           return;
         }
 
-        _BoundObjects.Add(obj, new ObjectBindingAdapter(obj, this));
+        var adapter = new ObjectBindingAdapter(obj, this, false);
+
+        try {
+
+          adapter.Wireup();
+
+        }
+        catch (AggregateException aex) {
+          foreach (var subex in aex.InnerExceptions) {
+            _ExceptionHandler.Invoke(subex);
+          }
+        }
+        catch (Exception ex) {
+          _ExceptionHandler.Invoke(ex);
+        }
+
+        _BoundObjects.Add(obj, adapter);
+
       }
     }
 

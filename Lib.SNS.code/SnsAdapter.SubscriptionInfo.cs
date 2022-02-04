@@ -13,10 +13,12 @@ namespace Amazon.SimpleNotificationService {
         this.TopicArn = topicArn;
         this.SubscriptionArn = subscriptionArn;
         this.IsLocalPending = isLocalPending;
+        this.Initiated = DateTime.Now;
       }
 
       private SnsAdapter ParentEndpoint { get; set; }
       public bool IsLocalPending { get; private set; }
+      public DateTime Initiated { get; private set; }
       public string TopicArn { get; private set; }
       public string SubscriptionArn { get; private set; }
 
